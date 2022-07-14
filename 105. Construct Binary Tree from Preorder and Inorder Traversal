@@ -1,0 +1,22 @@
+# python solution.....
+
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        return self.rec(preorder,inorder,0,len(inorder),0)
+    
+    
+    
+    def rec(self,preorder,inorder,i,n,j):
+        if n==0:
+            return None
+        temp=preorder[i]
+        root=TreeNode(temp)
+        sz=0
+        while (inorder[j+sz]!=temp):
+            sz+=1
+            
+        root.left=self.rec(preorder,inorder,i+1,sz,j)
+        root.right=self.rec(preorder,inorder,i+1+sz,n-1-sz,j+sz+1)
+        
+        return root
